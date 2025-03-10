@@ -4,3 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+bdk_wallet = "^1.1.0"
+bdk_bitcoind_rpc = "^0.18.0"
+bdk_file_store = "^0.18.1"
