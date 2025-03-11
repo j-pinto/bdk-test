@@ -1,4 +1,5 @@
 use bdk_bitcoind_rpc::bitcoincore_rpc::{Auth, Client, RpcApi};
+use bdk_wallet::bitcoin::{key::{self, Secp256k1}, NetworkKind};
 
 fn connect_to_node() -> Client {
     let rpc_auth = Auth::UserPass(String::from("user"), String::from("password"));
@@ -9,6 +10,14 @@ fn connect_to_node() -> Client {
 
 fn main() {
     let client = connect_to_node();
-    println!("{:?}", client.get_block_count());
+
+    let priv_key = key::PrivateKey::generate(NetworkKind::Test);
+    println!("private key: {}", priv_key);
+
+    let secp = Secp256k1::new();
+
+    let pub_key = priv_key.public_key(&secp);
+    println!("public key: {}", pub_key);
+
 }
 
